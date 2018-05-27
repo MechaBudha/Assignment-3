@@ -13,11 +13,13 @@ class Player : public Entity
 private :
 	float _speed;
 
+	void move(Direction direction, float elapsed);
+
 public:
 	Player(float x, float y, const char* imagePath);
 	~Player();
 
-	void move(Direction direction);
+	void update(float elapsed);
 };
 
 #endif

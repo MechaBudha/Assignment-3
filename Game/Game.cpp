@@ -2,7 +2,11 @@
 
 Game::Game(ALLEGRO_DISPLAY* display) : State(display)
 {
+	srand(time(0));
+
 	_player = new Player(0, SCREEN_HEIGHT / 2, PLAYER_PATH);
+	for (int i = 0; i < CANDIES; i++)
+		_candies[i] = new Candy(0, 0, CANDY_PATH);
 
 	_gameOver = false;
 }
@@ -16,9 +20,7 @@ void Game::input()
 {
 	ALLEGRO_EVENT event;
 	ALLEGRO_TIMEOUT timeout;
-	ALLEGRO_KEYBOARD_STATE keyState;
 	al_init_timeout(&timeout, TIMEOUT);
-	al_get_keyboard_state(&keyState);
 
 	if (al_wait_for_event_until(_queue, &event, &timeout))
 		switch (event.type)
@@ -30,19 +32,16 @@ void Game::input()
 				_gameOver = true;
 				break;
 		}
-
-	if (al_key_down(&keyState, ALLEGRO_KEY_LEFT))
-		_player->move(Left);
-	if (al_key_down(&keyState, ALLEGRO_KEY_RIGHT))
-		_player->move(Right);
-	if (al_key_down(&keyState, ALLEGRO_KEY_UP))
-		_player->move(Up);
-	if (al_key_down(&keyState, ALLEGRO_KEY_DOWN))
-		_player->move(Down);
 }
 
 void Game::update()
 {
+	float elapsed = al_get_time() - _timeAtLastFrame;
+	_timeAtLastFrame = al_get_time();
+
+	_player->update(elapsed);
+	for (int i = 0; i < CANDIES; i++)
+		_candies[i]->update(elapsed);
 
 }
 
@@ -52,7 +51,12 @@ void Game::draw()
 	{
 		_canDraw = false;
 		al_clear_to_color(al_map_rgba(0, 0, 0, 0));
-		al_draw_bitmap(_player->getSprite(), _player->getX(), _player->getY(), 0);		
+		
+		al_draw_bitmap(_player->getSprite(), _player->getX(), _player->getY(), false);
+		for (int i = 0; i < CANDIES; i++)
+			if (_candies[i]->isEnabled())
+				al_draw_bitmap(_candies[i]->getSprite(), _candies[i]->getX(), _candies[i]->getY(), false);
+
 		al_flip_display();
 	}
 }

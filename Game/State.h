@@ -12,6 +12,7 @@ protected:
 	ALLEGRO_TIMER* _timer;
 
 	bool _canDraw;
+	float _timeAtLastFrame;
 
 	virtual void input() = 0;
 	virtual void update() = 0;

@@ -1,14 +1,18 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <iostream>
+#include <ctime>
 #include "State.h"
 #include "Player.h"
+#include "Candy.h"
 
 class Game : public State
 {
 private:
 	Player* _player;
-	
+	Candy* _candies[CANDIES];
+
 	bool _gameOver;
 
 protected:
