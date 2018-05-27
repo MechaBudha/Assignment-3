@@ -6,12 +6,14 @@
 #include "State.h"
 #include "Player.h"
 #include "Candy.h"
+#include "HUD.h"
 
 class Game : public State
 {
 private:
 	Player* _player;
 	Candy* _candies[CANDIES];
+	HUD* _hud;
 
 	bool _gameOver;
 

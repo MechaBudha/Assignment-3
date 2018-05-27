@@ -7,13 +7,20 @@ Game::Game(ALLEGRO_DISPLAY* display) : State(display)
 	_player = new Player(0, SCREEN_HEIGHT / 2, PLAYER_PATH);
 	for (int i = 0; i < CANDIES; i++)
 		_candies[i] = new Candy(0, 0, CANDY_PATH);
+	_hud = new HUD(_display);
 
 	_gameOver = false;
 }
 
 Game::~Game()
 {
-	delete _player;
+	if (_player)
+		delete _player;
+	for (int i = 0; i < CANDIES; i++)
+		if (_candies[i])
+			delete _candies[i];
+	if (_hud)
+		delete _hud;
 }
 
 void Game::input()
@@ -42,7 +49,6 @@ void Game::update()
 	_player->update(elapsed);
 	for (int i = 0; i < CANDIES; i++)
 		_candies[i]->update(elapsed);
-
 }
 
 void Game::draw()
@@ -56,6 +62,8 @@ void Game::draw()
 		for (int i = 0; i < CANDIES; i++)
 			if (_candies[i]->isEnabled())
 				al_draw_bitmap(_candies[i]->getSprite(), _candies[i]->getX(), _candies[i]->getY(), false);
+
+		_hud->draw();
 
 		al_flip_display();
 	}

@@ -1,6 +1,8 @@
 #include <iostream>
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
+#include <allegro5\allegro.h>
+#include <allegro5\allegro_image.h>
+#include <allegro5\allegro_font.h>
+#include <allegro5\allegro_ttf.h>
 #include "Game.h"
 #include "Definitions.h"
 using namespace std;
@@ -31,7 +33,19 @@ int main(int argc, char** argv)
 
 	if (!al_init_image_addon())
 	{
-		cerr << "Error initializing Allefro Image." << endl;
+		cerr << "Error initializing Allegro Image." << endl;
+		return 1;
+	}
+
+	if (!al_init_font_addon())
+	{
+		cerr << "Error initializing Allegro Font." << endl;
+		return 1;
+	}
+
+	if (!al_init_ttf_addon())
+	{
+		cerr << "Error initializing Allegro TTF." << endl;
 		return 1;
 	}
 

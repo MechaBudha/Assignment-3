@@ -29,8 +29,14 @@
 #define CANDY_MIN_DURATION 3
 #define CANDY_MAX_DURATION 5
 
+// HUD Attributes
+#define HUD_FONT_SIZE 24
+#define HUD_YELLOW 0.6, 0.45, 0.1
 // Image Paths
 #define PLAYER_PATH "Assets/Images/Player.png"
 #define CANDY_PATH "Assets/Images/Candy.png"
+
+// Font Paths
+#define FONT_PATH "Assets/Fonts/Candy Shop Black.ttf"
 
 #endif
