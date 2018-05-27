@@ -95,7 +95,8 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\allegro_dependencies_x86\lib;$(SolutionDir)Dependencies\allegro_5.1.12_x86\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>allegro-debug.lib;allegro_main-debug.lib;allegro_image-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>allegro-debug.lib;allegro_main-debug.lib;allegro_image-debug.lib;allegro_audio-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)Dependencies\allegro_5.1.12_x86\bin\allegro-debug-5.1.dll" "$(OutDir)"
@@ -127,7 +128,8 @@ copy "$(SolutionDir)Dependencies\allegro_5.1.12_x86\bin\allegro_image-debug-5.1.
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\allegro_dependencies_x86\lib;$(SolutionDir)Dependencies\allegro_5.1.12_x86\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>allegro.lib;allegro_main.lib;allegro_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>allegro.lib;allegro_main.lib;allegro_image.lib;allegro_audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)Dependencies\allegro_5.1.12_x86\bin\allegro-5.1.dll" "$(OutDir)"
@@ -150,13 +152,17 @@ copy "$(SolutionDir)Dependencies\allegro_5.1.12_x86\bin\allegro_image-5.1.dll" "
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

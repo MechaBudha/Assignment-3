@@ -29,6 +29,12 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
+	if (!al_init_image_addon())
+	{
+		cerr << "Error initializing Allefro Image." << endl;
+		return 1;
+	}
+
 	game = new Game(display);
 	game->run();
 

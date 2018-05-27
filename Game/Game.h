@@ -2,10 +2,13 @@
 #define GAME_H
 
 #include "State.h"
+#include "Player.h"
 
 class Game : public State
 {
 private:
+	Player* _player;
+	
 	bool _gameOver;
 
 protected:
