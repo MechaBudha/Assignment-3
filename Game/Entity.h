@@ -10,16 +10,16 @@ class Entity
 protected:
 	ALLEGRO_BITMAP* _sprite;
 
-	float _x;
-	float _y;
+	int _x;
+	int _y;
 
 public:
-	Entity(float x, float y, const char* imagePath);
+	Entity(int x, int y, const char* imagePath);
 	~Entity();
 	
 	ALLEGRO_BITMAP* getSprite() { return _sprite; }
-	inline float getX() { return _x; }
-	inline float getY() { return _y; }
+	inline int getX() { return _x; }
+	inline int getY() { return _y; }
 };
 
 #endif

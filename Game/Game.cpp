@@ -10,6 +10,7 @@ Game::Game(ALLEGRO_DISPLAY* display) : State(display)
 	_hud = new HUD(_display);
 
 	_gameOver = false;
+	_score = 0;
 }
 
 Game::~Game()
@@ -49,6 +50,9 @@ void Game::update()
 	_player->update(elapsed);
 	for (int i = 0; i < CANDIES; i++)
 		_candies[i]->update(elapsed);
+	for (int i = 0; i < CANDIES; i++)
+		if (_candies[i]->isEnabled() && collide(_player, _candies[i]))
+			playerCandyCollision(_player, _candies[i]);
 }
 
 void Game::draw()
@@ -67,6 +71,24 @@ void Game::draw()
 
 		al_flip_display();
 	}
+}
+
+bool Game::collide(Entity* a, Entity* b)
+{
+	if (a->getX() + al_get_bitmap_width(a->getSprite()) > b->getX() &&
+		a->getX() < b->getX() + al_get_bitmap_width(b->getSprite()) &&
+		a->getY() + al_get_bitmap_height(a->getSprite()) > b->getY() &&
+		a->getY() < b->getY() + al_get_bitmap_height(b->getSprite()))
+		return true;
+	else
+		return false;
+}
+
+void Game::playerCandyCollision(Player* p, Candy* c)
+{
+	c->disable();
+	_score += CANDY_SCORE;
+	_hud->update(Score, _score);	
 }
 
 void Game::run()

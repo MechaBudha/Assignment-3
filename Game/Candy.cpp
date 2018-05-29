@@ -1,6 +1,6 @@
 #include "Candy.h"
 
-Candy::Candy(float x, float y, const char* imagePath) : Entity(x, y, imagePath)
+Candy::Candy(int x, int y, const char* imagePath) : Entity(x, y, imagePath)
 {
 	disable();
 	_spawnTime = rand() % (CANDY_MAX_SPAWN_TIME - CANDY_MIN_SPAWN_TIME + 1) + CANDY_MIN_SPAWN_TIME;

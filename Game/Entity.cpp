@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(float x, float y, const char* imagePath)
+Entity::Entity(int x, int y, const char* imagePath)
 {
 	_sprite = al_load_bitmap(imagePath);
 	_x = x;

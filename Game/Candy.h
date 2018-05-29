@@ -11,7 +11,7 @@ private:
 	float _onScreenTime;
 
 public:
-	Candy(float x, float y, const char* imagePath);
+	Candy(int x, int y, const char* imagePath);
 	~Candy();
 
 	void update(float elapsed);

@@ -2,6 +2,7 @@
 #define DEFINITIONS_H
 
 // Display Settings
+#define GAME_NAME "The Gluttonous of Rhodes"
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 #define FRAME_TIME 1.0 / 60
@@ -18,6 +19,7 @@
 
 // Candy Attributes
 #define CANDIES 10
+#define CANDY_SCORE 5
 #define CANDY_WIDTH 32
 #define CANDY_HEIGHT 16
 #define CANDY_MIN_X 32
@@ -35,6 +37,7 @@
 // Image Paths
 #define PLAYER_PATH "Assets/Images/Player.png"
 #define CANDY_PATH "Assets/Images/Candy.png"
+#define ICON_PATH "Assets/Images/Icon.png"
 
 // Font Paths
 #define FONT_PATH "Assets/Fonts/Candy Shop Black.ttf"

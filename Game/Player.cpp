@@ -1,13 +1,13 @@
 #include "Player.h"
 
-Player::Player(float x, float y, const char* imagePath) : Entity(x, y , imagePath)
+Player::Player(int x, int y, const char* imagePath) : Entity(x, y , imagePath)
 {
 	_speed = PLAYER_SPEED;
 }
 
 Player::~Player()
 {
-
+	
 }
 
 void Player::move(Direction direction, float elapsed)

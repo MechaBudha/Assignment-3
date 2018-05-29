@@ -16,11 +16,15 @@ private:
 	HUD* _hud;
 
 	bool _gameOver;
+	int _score;
 
 protected:
 	void input();
 	void update();
 	void draw();
+
+	bool collide(Entity* a, Entity* b);
+	void playerCandyCollision(Player* p, Candy* c);
 
 public:
 	Game(ALLEGRO_DISPLAY* display);
