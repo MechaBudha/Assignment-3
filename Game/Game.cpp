@@ -4,9 +4,11 @@ Game::Game(ALLEGRO_DISPLAY* display) : State(display)
 {
 	srand(time(0));
 
-	_player = new Player(0, SCREEN_HEIGHT / 2, PLAYER_PATH);
+	_player = new Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_PATH);
 	for (int i = 0; i < CANDIES; i++)
 		_candies[i] = new Candy(0, 0, CANDY_PATH);
+	for (int i = 0; i < BOMBS; i++)
+		_bombs[i] = new Bomb(0, 0, BOMB_PATH);
 	_hud = new HUD(_display);
 
 	_gameOver = false;
@@ -20,6 +22,9 @@ Game::~Game()
 	for (int i = 0; i < CANDIES; i++)
 		if (_candies[i])
 			delete _candies[i];
+	for (int i = 0; i < BOMBS; i++)
+		if (_bombs[i])
+			delete _bombs[i];
 	if (_hud)
 		delete _hud;
 }
@@ -50,9 +55,14 @@ void Game::update()
 	_player->update(elapsed);
 	for (int i = 0; i < CANDIES; i++)
 		_candies[i]->update(elapsed);
+	for (int i = 0; i < BOMBS; i++)
+		_bombs[i]->update(elapsed);
 	for (int i = 0; i < CANDIES; i++)
 		if (_candies[i]->isEnabled() && collide(_player, _candies[i]))
 			playerCandyCollision(_player, _candies[i]);
+	for (int i = 0; i < BOMBS; i++)
+		if (_bombs[i]->isEnabled() && collide(_player, _bombs[i]))
+			playerBombCollision(_player, _bombs[i]);
 }
 
 void Game::draw()
@@ -66,7 +76,9 @@ void Game::draw()
 		for (int i = 0; i < CANDIES; i++)
 			if (_candies[i]->isEnabled())
 				al_draw_bitmap(_candies[i]->getSprite(), _candies[i]->getX(), _candies[i]->getY(), false);
-
+		for (int i = 0; i < BOMBS; i++)
+			if (_bombs[i]->isEnabled())
+				al_draw_bitmap(_bombs[i]->getSprite(), _bombs[i]->getX(), _bombs[i]->getY(), false);
 		_hud->draw();
 
 		al_flip_display();
@@ -89,6 +101,15 @@ void Game::playerCandyCollision(Player* p, Candy* c)
 	c->disable();
 	_score += CANDY_SCORE;
 	_hud->update(Score, _score);	
+}
+
+void Game::playerBombCollision(Player* p, Bomb* b)
+{
+	b->disable();
+	p->die();
+	_hud->update(Lives, _player->getLives());
+	if (p->getLives() == 0)
+		_gameOver = true;
 }
 
 void Game::run()

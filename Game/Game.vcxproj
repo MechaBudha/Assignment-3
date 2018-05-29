@@ -158,6 +158,7 @@ copy "$(SolutionDir)Dependencies\allegro_5.1.12_x86\bin\allegro_ttf-5.1.dll" "$(
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Candy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -167,6 +168,7 @@ copy "$(SolutionDir)Dependencies\allegro_5.1.12_x86\bin\allegro_ttf-5.1.dll" "$(
     <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Candy.h" />
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Game.h" />

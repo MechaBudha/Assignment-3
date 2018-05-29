@@ -10,7 +10,7 @@ using namespace std;
 
 enum Element
 {
-	Score
+	Score, Lives
 };
 
 class HUD
@@ -20,6 +20,7 @@ private:
 	ALLEGRO_FONT* _font;
 
 	string _scoreText;
+	string _livesText;
 
 public:
 	HUD(ALLEGRO_DISPLAY* _display);

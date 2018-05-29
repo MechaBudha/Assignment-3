@@ -10,7 +10,8 @@ enum Direction
 
 class Player : public Entity
 {
-private :
+private:
+	int _lives;
 	float _speed;
 
 	void move(Direction direction, float elapsed);
@@ -20,6 +21,10 @@ public:
 	~Player();
 
 	void update(float elapsed);
+	void die();
+	void respawn();
+
+	inline int getLives() { return _lives; }
 };
 
 #endif

@@ -2,6 +2,7 @@
 
 Player::Player(int x, int y, const char* imagePath) : Entity(x, y , imagePath)
 {
+	_lives = PLAYER_LIVES;
 	_speed = PLAYER_SPEED;
 }
 
@@ -46,4 +47,17 @@ void Player::update(float elapsed)
 		move(Up, elapsed);
 	if (al_key_down(&keyState, ALLEGRO_KEY_DOWN))
 		move(Down, elapsed);
+}
+
+void Player::die()
+{
+	_lives--;
+	if (_lives > 0)
+		respawn();
+}
+
+void Player::respawn()
+{
+	_x = SCREEN_WIDTH / 2;
+	_y = SCREEN_HEIGHT / 2;
 }

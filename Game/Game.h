@@ -6,6 +6,7 @@
 #include "State.h"
 #include "Player.h"
 #include "Candy.h"
+#include "Bomb.h"
 #include "HUD.h"
 
 class Game : public State
@@ -13,6 +14,7 @@ class Game : public State
 private:
 	Player* _player;
 	Candy* _candies[CANDIES];
+	Bomb* _bombs[BOMBS];
 	HUD* _hud;
 
 	bool _gameOver;
@@ -25,6 +27,7 @@ protected:
 
 	bool collide(Entity* a, Entity* b);
 	void playerCandyCollision(Player* p, Candy* c);
+	void playerBombCollision(Player* p, Bomb* b);
 
 public:
 	Game(ALLEGRO_DISPLAY* display);
