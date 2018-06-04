@@ -1,0 +1,5 @@
+Encontré el trabajo de mi compañero muy ordenado, legible y completo.
+
+Los commits de su repositorio son demasiado generales, y no dejan en claro dónde encontrar la primer implementación de algunas funcionalidades.
+
+El juego en sí esta bien realizado, pero tuve dificultades con el código al encontrarme con algunos casos de sobre-optimización temprana.

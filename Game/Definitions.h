@@ -32,7 +32,7 @@
 #define CANDY_MIN_DURATION 3
 #define CANDY_MAX_DURATION 5
 
-// Candy Attributes
+// Bomb Attributes
 #define BOMBS 3
 #define BOMB_WIDTH 32
 #define BOMB_HEIGHT 32
@@ -44,6 +44,13 @@
 #define BOMB_MAX_SPAWN_TIME 10
 #define BOMB_MIN_DURATION 5
 #define BOMB_MAX_DURATION 7
+#define BOMB_DIREC_UP 1
+#define BOMB_DIREC_RIGHT 2
+#define BOMB_DIREC_DOWN 3
+#define BOMB_DIREC_LEFT 4
+#define BOMB_DIREC_MIN BOMB_DIREC_UP
+#define BOMB_DIREC_MAX BOMB_DIREC_LEFT
+#define BOMB_MOV_SPEED 150
 
 // HUD Attributes
 #define HUD_FONT_SIZE 24
