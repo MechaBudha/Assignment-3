@@ -5,12 +5,15 @@
 #include <allegro5\allegro_ttf.h>
 #include "Game.h"
 #include "Definitions.h"
+#include "Menu.h"
 using namespace std;
 
 int main(int argc, char** argv)
 {
+	bool jugarSalir;
 	ALLEGRO_DISPLAY* display;
 	Game* game;
+	Menu* menu;
 
 	if (!al_init())
 	{
@@ -48,11 +51,15 @@ int main(int argc, char** argv)
 		cerr << "Error initializing Allegro TTF." << endl;
 		return 1;
 	}
-
-	game = new Game(display);
-	game->run();
+	menu = new Menu(jugarSalir, display);
+	if (jugarSalir){
+		game = new Game(display);
+		game->run();
+		delete game;
+	}
 
 	al_destroy_display(display);
 	al_uninstall_keyboard();
+	delete menu;
 	return 0;
 }
