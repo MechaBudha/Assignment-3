@@ -44,13 +44,21 @@
 #define BOMB_MAX_SPAWN_TIME 10
 #define BOMB_MIN_DURATION 5
 #define BOMB_MAX_DURATION 7
-#define BOMB_DIREC_UP 1
-#define BOMB_DIREC_RIGHT 2
-#define BOMB_DIREC_DOWN 3
-#define BOMB_DIREC_LEFT 4
-#define BOMB_DIREC_MIN BOMB_DIREC_UP
-#define BOMB_DIREC_MAX BOMB_DIREC_LEFT
-#define BOMB_MOV_SPEED 150
+#define BOMB_SPEED 150
+
+//Non-player entity movement attributes
+#define MOV_DIREC_UP 1
+#define MOV_DIREC_RIGHT 2
+#define MOV_DIREC_DOWN 3
+#define MOV_DIREC_LEFT 4
+#define MOV_DIREC_MIN MOV_DIREC_UP
+#define MOV_DIREC_MAX MOV_DIREC_LEFT
+
+//Bullet attributes
+#define BULLET_SPEED 300
+#define BULLET_HEIGHT 32
+#define BULLET_WIDTH 32
+#define BULLETS 5
 
 // HUD Attributes
 #define HUD_FONT_SIZE 24
@@ -62,6 +70,7 @@
 #define CANDY_PATH "Assets/Images/Candy.png"
 #define BOMB_PATH "Assets/Images/Bomb.png"
 #define ICON_PATH "Assets/Images/Icon.png"
+#define BULLET_PATH "Assets/Images/Bullet.png"
 
 // Font Paths
 #define FONT_PATH "Assets/Fonts/Candy Shop Black.ttf"

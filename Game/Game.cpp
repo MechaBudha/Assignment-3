@@ -4,11 +4,13 @@ Game::Game(ALLEGRO_DISPLAY* display) : State(display)
 {
 	srand(time(0));
 
-	_player = new Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_PATH);
 	for (int i = 0; i < CANDIES; i++)
 		_candies[i] = new Candy(0, 0, CANDY_PATH);
 	for (int i = 0; i < BOMBS; i++)
 		_bombs[i] = new Bomb(0, 0, BOMB_PATH);
+	for (int i = 0; i < BULLETS; i++)
+		_bullets[i] = new Bullet(0,0, BULLET_PATH);
+	_player = new Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_PATH, _bullets);
 	_hud = new HUD(_display);
 
 	_gameOver = false;
@@ -25,6 +27,9 @@ Game::~Game()
 	for (int i = 0; i < BOMBS; i++)
 		if (_bombs[i])
 			delete _bombs[i];
+	for (int i = 0; i < BULLETS; i++)
+		if (_bullets[i])
+			delete _bullets[i];
 	if (_hud)
 		delete _hud;
 }
@@ -57,12 +62,23 @@ void Game::update()
 		_candies[i]->update(elapsed);
 	for (int i = 0; i < BOMBS; i++)
 		_bombs[i]->update(elapsed);
+	for (int i = 0; i < BULLETS; i++)
+		_bullets[i]->update(elapsed);
 	for (int i = 0; i < CANDIES; i++)
 		if (_candies[i]->isEnabled() && collide(_player, _candies[i]))
 			playerCandyCollision(_player, _candies[i]);
 	for (int i = 0; i < BOMBS; i++)
 		if (_bombs[i]->isEnabled() && collide(_player, _bombs[i]))
 			playerBombCollision(_player, _bombs[i]);
+	for (int i = 0; i < BULLETS; i++) {
+		if (_bullets[i]->isEnabled()){
+			for (int c = 0; c < BOMBS; c++) {
+				if (_bombs[c]->isEnabled() && collide(_bullets[i], _bombs[c]))	{
+					bulletBombCollision(_bullets[i], _bombs[c]);
+				}
+			}
+		}
+	}
 }
 
 void Game::draw()
@@ -79,6 +95,9 @@ void Game::draw()
 		for (int i = 0; i < BOMBS; i++)
 			if (_bombs[i]->isEnabled())
 				al_draw_bitmap(_bombs[i]->getSprite(), _bombs[i]->getX(), _bombs[i]->getY(), false);
+		for (int i = 0; i < BULLETS; i++)
+			if (_bullets[i]->isEnabled())
+				al_draw_bitmap(_bullets[i]->getSprite(), _bullets[i]->getX(), _bullets[i]->getY(), false);
 		_hud->draw();
 
 		al_flip_display();
@@ -112,6 +131,10 @@ void Game::playerBombCollision(Player* p, Bomb* b)
 		_gameOver = true;
 }
 
+void Game::bulletBombCollision(Bullet* a, Bomb* b){
+	a->disable();
+	b->disable();
+}
 void Game::run()
 {
 	while (!_gameOver)
